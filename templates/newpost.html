@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 style="text-align: center;">Your (CAT) Blog!</h1>
+
+<div>
+    <form method='post'>
+        <label for='title'>
+            New Post Title:
+            <input type='text' name='title' />
+            {% with messages = get_flashed_messages(with_categories=True) %}
+                {% for category,message in messages %}
+                    <p class="{{category}}">{{message}}</p>
+                {% endfor %}
+        {% endwith %}
+        </label>
+    </div>
+<br>
+        <label for='blog_body'>
+            Your new blog:
+            <br>
+            <textarea name='blog_body' rows="10" cols="40"></textarea>
+        </label>
+        <br>
+        <input type='submit' />
+    </form>
+
+{% endblock %}
