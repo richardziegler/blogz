@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1 style="text-align: center;">Your (CAT) Blog!</h1>
+    <h1 style="text-align: center;">Build-A-Blog</h1>
 
 
 
@@ -11,7 +11,7 @@
 
             {% for post in posts %}
             <hr>
-            <h2>{{post.title}}
+            <h2><a href="/viewpost?id={{post.id}}">{{post.title}}</a>
                 <!-- <form method='POST' action='/delete-post' style="display:inline-block" /> 
                 <input type='hidden' name='post-id' value='{{post.id}}' />
                 <input type='submit' value='Done!' />
