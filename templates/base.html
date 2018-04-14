@@ -13,13 +13,23 @@
                 border-radius: 25px;
                 background: #bce4f2; 
             }
+
+            .log {
+                display: inline;
+                float: right;
+            }
         </style>
     </head>
 <body>
 
     <div class="body">
     <div>
-        <a href="/">Blog Main Page</a> | <a href="/newpost">Write A New Blog Post</a>
+        <a href="/blog">Blog Main Page</a> | <a href="/newpost">Write A New Blog Post</a>
+
+
+        <div class="log">
+        <a href="/login">Login</a> | <a href="/logout">Logout</a>
+        </div>
     </div>
 
     {% block content %}
