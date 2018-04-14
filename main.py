@@ -23,7 +23,7 @@ class Post(db.Model):
 @app.route('/', methods=['POST', 'GET'])
 def index():
 
-    posts = Post.query.all()
+    posts = Post.query.order_by('-id').all()
     return render_template('blog.html', title="Build-A-Blog", 
         posts=posts)
 

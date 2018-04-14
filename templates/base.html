@@ -7,16 +7,26 @@
                 color: red;
                 font-style: italic;
             }
+
+            .body {
+                padding: 5%;
+                border-radius: 25px;
+                background: #bce4f2; 
+            }
         </style>
     </head>
 <body>
 
+    <div class="body">
     <div>
         <a href="/">Blog Main Page</a> | <a href="/newpost">Write A New Blog Post</a>
     </div>
 
     {% block content %}
     {% endblock %}
+
+    </body>
+    <div>
 
 </body>
 </html>
