@@ -32,21 +32,24 @@ def index():
 
 @app.route('/newpost', methods=['POST', 'GET'])
 def newpost():
-
+    title_error = ''
+    body_error = ''
     if request.method == 'POST':
         title = request.form['title']
         blog_body = request.form['blog_body']
 
-        if title == "":
-            flash("Please fill in the title", "error")
         if blog_body == "":
-            flash("Please fill in the body", "body_error")
-            return redirect('/newpost')
+            body_error = 'Please fill in the body'
 
-        new_post = Post(title, blog_body)
-        db.session.add(new_post)
-        db.session.commit()
-        return redirect('/')
+        if title == "":
+            title_error = 'Please enter a post title'
+        if not body_error and not title_error:
+            new_post = Post(title, blog_body)
+            db.session.add(new_post)
+            db.session.commit()
+            return redirect('/')
+        else:
+            return render_template('newpost.html', title_error=title_error, body_error=body_error)
     return render_template('newpost.html')
 
 

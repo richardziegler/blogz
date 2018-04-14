@@ -8,11 +8,7 @@
         <label for='title'>
             New Post Title:
             <input type='text' name='title' />
-            {% with messages = get_flashed_messages(with_categories=True) %}
-                {% for category,message in messages %}
-                    <p class="{{category}}">{{message}}</p>
-                {% endfor %}
-        {% endwith %}
+            <span class="error">{{title_error}}</span>
         </label>
     </div>
 <br>
@@ -23,6 +19,7 @@
         </label>
         <br>
         <input type='submit' />
+        <span class="error">{{body_error}}</span>
     </form>
 
 {% endblock %}
