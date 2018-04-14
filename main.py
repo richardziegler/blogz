@@ -19,9 +19,12 @@ class Post(db.Model):
         self.title = title
         self.blog_body = blog_body
 
-
 @app.route('/', methods=['POST', 'GET'])
 def index():
+    return redirect('/blog')
+
+@app.route('/blog', methods=['POST', 'GET'])
+def blog():
 
     posts = Post.query.order_by('-id').all()
     return render_template('blog.html', title="Build-A-Blog", 
