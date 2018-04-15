@@ -34,21 +34,28 @@ class User(db.Model):
 
 @app.before_request
 def require_login():
-    allowed_routes = ['blog', 'login', 'signup', 'viewpost', 'logout']
+    allowed_routes = ['blog', 'login', 'signup', 'viewpost', 'logout', 'index']
     if request.endpoint not in allowed_routes and 'username' not in session:
         return redirect('/login')
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
-    return redirect('/blog')
+    users = User.query.order_by('-id').all()
+
+    return render_template('index.html', users=users, title="Build-A-Blog")
 
 @app.route('/blog', methods=['POST', 'GET'])
 def blog():
+    id = request.args.get('id')
+    if request.method == 'POST':
+        id = request.form['id']
+
+    post_id = Post.query.filter_by(id=id).first()
 
     owner = User.query.all()
     posts = Post.query.order_by('-id').all()
     return render_template('blog.html', title="Build-A-Blog", 
-        posts=posts, owner=owner)
+        posts=posts, owner=owner, post_id=post_id)
 
 @app.route('/newpost', methods=['POST', 'GET'])
 def newpost():
