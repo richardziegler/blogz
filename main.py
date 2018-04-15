@@ -46,16 +46,25 @@ def index():
 
 @app.route('/blog', methods=['POST', 'GET'])
 def blog():
-    id = request.args.get('id')
+    view_post_id = request.args.get("id")
+    username = request.args.get("user")
     if request.method == 'POST':
         id = request.form['id']
 
-    post_id = Post.query.filter_by(id=id).first()
+    if username:
+        userposts = User.query.get(username)
+    else:
+        userposts = ""
+  
+    if view_post_id:
+        viewpost = Post.query.get(int(view_post_id))
+    else:
+        viewpost = ""
 
     owner = User.query.all()
     posts = Post.query.order_by('-id').all()
     return render_template('blog.html', title="Build-A-Blog", 
-        posts=posts, owner=owner, post_id=post_id)
+        posts=posts, owner=owner, viewpost=viewpost, userposts=userposts)
 
 @app.route('/newpost', methods=['POST', 'GET'])
 def newpost():

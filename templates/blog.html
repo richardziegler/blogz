@@ -3,17 +3,27 @@
 {% block content %}
     <h1 style="text-align: center;">All Blog Posts</h1>
 
-    {% if posts|length == 0 %}
-    <p>No posts yet.</p>
-    {% else %}
 
-            {% for post in posts %}
-            <hr>
-            <h2><a href="/blog?id={{post.id}}">{{post.title}}</a>
-            </h2>
-            <p>{{post.blog_body}}</p>
-            <p>Written by {{owner.username}}</p>
-            {% endfor %}
+{% if userposts != "" %}
+{% for post in posts %}
+<p>{{user.username}}</p>
+{% endfor %}
+{% endif %}
+
+
+    {% if viewpost != "" %}
+    <h2>{{viewpost.title}}</h2>
+    <p>{{viewpost.blog_body}}<hr></p>
+    {% endif %}
+    
+    {% if viewpost == "" %}
+        {% for post in posts %}
+        <hr>
+        <h2><a href="/blog?id={{post.id}}">{{post.title}}</a>
+        </h2>
+        <p>{{post.blog_body}}</p>
+        <p>Written by {{owner.username}}</p>
+        {% endfor %}
         <hr>
     {% endif %}
 
