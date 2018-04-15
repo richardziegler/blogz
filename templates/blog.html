@@ -4,27 +4,32 @@
     <h1 style="text-align: center;">All Blog Posts</h1>
 
 
-{% if userposts != "" %}
-{% for post in posts %}
-<p>{{user.username}}</p>
-{% endfor %}
-{% endif %}
 
 
-    {% if viewpost != "" %}
+{% if specific_user_posts %}
+    {% for post in specific_user_posts %}
+        <hr>
+        <h2>{{post.title}}</h2>
+        <p>{{post.blog_body}}</p>
+        <p>Written by <em><a href="/blog?user={{post.owner_id}}">{{post.owner_id}}</a></p></em>
+    {% endfor %}
+
+{% elif viewpost != "" %}
+    <hr>
     <h2>{{viewpost.title}}</h2>
-    <p>{{viewpost.blog_body}}<hr></p>
-    {% endif %}
-    
-    {% if viewpost == "" %}
-        {% for post in posts %}
+    <p>{{viewpost.blog_body}}</p>
+    <p>Written by <em><a href="/blog?user={{viewpost.owner_id}}">{{viewpost.owner_id}}</a></p></em>
+
+{% else %}   
+
+    {% for post in posts %}
         <hr>
         <h2><a href="/blog?id={{post.id}}">{{post.title}}</a>
         </h2>
         <p>{{post.blog_body}}</p>
-        <p>Written by {{owner.username}}</p>
-        {% endfor %}
-        <hr>
-    {% endif %}
+        <p>Written by <em><a href="/blog?user={{post.owner_id}}">{{post.owner_id}}</a></p></em>
+    {% endfor %}
+{% endif %}
+<hr>
 
 {% endblock %}

@@ -51,20 +51,35 @@ def blog():
     if request.method == 'POST':
         id = request.form['id']
 
+
     if username:
-        userposts = User.query.get(username)
+        userposts = User.query.filter_by(username=username).first()
+        user_id = userposts.id
+        specific_user_posts = Post.query.filter_by(owner_id=user_id).all()
     else:
         userposts = ""
+        specific_user_posts = ""
   
     if view_post_id:
         viewpost = Post.query.get(int(view_post_id))
     else:
         viewpost = ""
 
-    owner = User.query.all()
+    users = User.query.order_by('id').first()
     posts = Post.query.order_by('-id').all()
+    print(users.username)
+    print(users.username)
+    print(users.username)
+    print(users.username)
+    print(userposts.username)
+    print(userposts.username)
+    print(userposts.username)
+    print(userposts.username)
+    print(userposts.username)
+
+
     return render_template('blog.html', title="Build-A-Blog", 
-        posts=posts, owner=owner, viewpost=viewpost, userposts=userposts)
+        posts=posts, viewpost=viewpost, specific_user_posts=specific_user_posts, users=users, userposts=userposts)
 
 @app.route('/newpost', methods=['POST', 'GET'])
 def newpost():
