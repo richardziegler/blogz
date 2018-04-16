@@ -62,20 +62,14 @@ def blog():
   
     if view_post_id:
         viewpost = Post.query.get(int(view_post_id))
+        print(viewpost)
+        print(viewpost)
+        print('LOOK HERE LOOK HERE')
     else:
         viewpost = ""
 
-    users = User.query.order_by('id').first()
+    users = Post.query.all()
     posts = Post.query.order_by('-id').all()
-    print(users.username)
-    print(users.username)
-    print(users.username)
-    print(users.username)
-    print(userposts.username)
-    print(userposts.username)
-    print(userposts.username)
-    print(userposts.username)
-    print(userposts.username)
 
 
     return render_template('blog.html', title="Build-A-Blog", 
